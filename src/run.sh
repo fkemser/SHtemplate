@@ -1078,6 +1078,8 @@ init_lang() {
   eval "readonly TXT_INVALID_ARG_1=\${LIB_SHTPL_${ID_LANG}_TXT_INVALID_ARG_1}"
   eval "readonly TXT_INVALID_ARG_2=\${LIB_SHTPL_${ID_LANG}_TXT_INVALID_ARG_2}"
   eval "readonly TXT_PROCESSING=\${LIB_SHTPL_${ID_LANG}_TXT_PROCESSING}"
+  eval "readonly TXT_TRAP_MAIN_TERMINATED=\${LIB_SHTPL_${ID_LANG}_TXT_TRAP_MAIN_TERMINATED}"
+  eval "readonly TXT_TRAP_MAIN_TERMINATING=\${LIB_SHTPL_${ID_LANG}_TXT_TRAP_MAIN_TERMINATING}"
 }
 
 #===  FUNCTION  ================================================================
@@ -1494,7 +1496,7 @@ trap_main() {
   local pid
   pid="$(lib_os_ps_pidlock --getpid)" || \
   lib_os_ps_get_ownpid pid
-  info --syslog "Signal <${arg_signal}> received. Terminating (PID <${pid}>) ..."
+  eval info --syslog \"${TXT_TRAP_MAIN_TERMINATING}\"
 
   # Special Trap Handling
   case "${arg_mode}" in
@@ -1594,7 +1596,7 @@ trap_main() {
   #  If PID lock is disabled ("PIDLOCK_ENABLED"="false"), then
   #  <lib_os_ps_pidlock()> will fail but without any consequences.
   lib_os_ps_pidlock --unlock
-  info --syslog "Script terminated (PID <${pid}>)."
+  eval info --syslog \"${TXT_TRAP_MAIN_TERMINATED}\"
 
   #  Exit - Depends on signal ...
   case "${arg_signal}" in

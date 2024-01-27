@@ -1096,15 +1096,15 @@ Project Link: [https://github.com/fkemser/SHtemplate](https://github.com/fkemser
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 
-[screenshot11]: res/screenshot11.gif
-[screenshot21]: res/screenshot21.gif
+[screenshot11]: res/screenshot11.png
+[screenshot21]: res/screenshot21.png
 [screenshot31]: res/screenshot31.gif
 [screenshot41]: res/screenshot41.gif
 [screenshot51]: res/screenshot51.png
 [screenshot52]: res/screenshot52.png
 [screenshot61]: res/screenshot61.png
-[screenshot71]: res/screenshot71.gif
-[screenshot81]: res/screenshot81.gif
+[screenshot71]: res/screenshot71.png
+[screenshot81]: res/screenshot81.png
 
 [SHlib-url]: https://github.com/fkemser/SHlib
 [SHtemplateLIB-url]: https://github.com/fkemser/SHtemplateLIB

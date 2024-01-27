@@ -103,8 +103,8 @@ readonly L_RUN_EN_HLP_DES_ARG_PASSWORD="Help <arg_password>. See also (1)."
 #  arg_str
 #-------------------------------------------------------------------------------
 readonly L_RUN_EN_DLG_TTL_ARG_STR="Dialogue Title <arg_str>"
-readonly L_RUN_DLG_TXT_ARG_STR_EN_1="Dialogue Text <arg_str> Part 1, extended by some command's output, e.g. 'date':"
-readonly L_RUN_DLG_TXT_ARG_STR_EN_2="\
+readonly L_RUN_EN_DLG_TXT_ARG_STR_1="Dialogue Text <arg_str> Part 1, extended by some command's output, e.g. 'date':"
+readonly L_RUN_EN_DLG_TXT_ARG_STR_2="\
 Dialogue Text <arg_str> Part 2
 
 In this case only alphanumeric characters [A-Za-z0-9] are allowed. Select <OK> to continue or <${LIB_SHTPL_EN_TXT_GOBACK}> to get to the previous menu."
