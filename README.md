@@ -146,29 +146,36 @@
 This is a (mostly) **POSIX-/Bourne-Shell(sh)-compliant** repository template that provides boilerplates for
 
 * **checking requirements**, e.g. commands, (running) services, superuser rights, etc.  
-![Screenshot 11][screenshot11]
+
+  ![Screenshot 11][screenshot11]
 
 * **checking and parsing arguments**  
-![Screenshot 21][screenshot21]
+
+  ![Screenshot 21][screenshot21]
 
 * generating **well-formatted help (`-h|--help`) messages**  
-![Screenshot 31][screenshot31]
+
+  ![Screenshot 31][screenshot31]
 
 * **interactive** (`dialog`-based) menus  
-![Screenshot 41][screenshot41]
+
+  ![Screenshot 41][screenshot41]
 
 * **multi-language support** in terminal and/or `dialog` messages where the system's current language is automatically detected  
-![Screenshot 51][screenshot51]
-![Screenshot 52][screenshot52]
+
+  ![Screenshot 51][screenshot51]![Screenshot 52][screenshot52]
 
 * defining **trap handlers**, e.g. for cleanup operations on exit  
-![Screenshot 61][screenshot61]
+
+  ![Screenshot 61][screenshot61]
 
 * **PID based locking** ensuring that only one instance runs at a time  
-![Screenshot 71][screenshot71]
+
+  ![Screenshot 71][screenshot71]
 
 * **daemon mode (with sample code for parallel file processing)**  
-![Screenshot 81][screenshot81]
+
+  ![Screenshot 81][screenshot81]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
