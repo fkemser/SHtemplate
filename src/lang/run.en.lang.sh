@@ -12,7 +12,7 @@
 #
 #  DESCRIPTION:   --English-- String Constants File for '/src/run.sh'
 #                 Used to generate help texts, interactive dialogues,
-#                 and other  terminal/log messages.
+#                 and other terminal/log messages.
 #
 #         BUGS:   ---
 #
