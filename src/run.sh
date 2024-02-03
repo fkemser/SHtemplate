@@ -1583,7 +1583,7 @@ trap_main() {
 
     # Kill (other) subshells / child processes
     local subpids
-    subpids="$(lib_os_ps_get_descendants "${pid}")"
+    lib_os_ps_get_descendants subpids "${pid}"
     lib_os_ps_kill_by_pid "${subpids}" "${sub_signal}" "false" "true" "true"
 
     # Remove subshell PID directory
@@ -1967,7 +1967,7 @@ trap_func1() {
   #-----------------------------------------------------------------------------
   # Kill subshells / child processes + remove PID file
   local subpids
-  subpids="$(lib_os_ps_get_descendants "${pid}")"
+  lib_os_ps_get_descendants subpids "${pid}"
   lib_os_ps_kill_by_pid "${subpids}" "${arg_signal}" "true" "true" "true"
   lib_core_sudo rm -f "${arg_pidfile}"
 

@@ -191,12 +191,12 @@ The project has been developed and tested on the following system:
 
 | Info | Description
 ---: | ---
-OS | Raspbian GNU/Linux 11 (bullseye)
-Kernel | 5.15.61-v7l+
-Packages | [coreutils (8.32-4 und andere)](https://packages.debian.org/bullseye/coreutils)
-|| [dash (0.5.11+git20200708+dd9ef66-5)](https://packages.debian.org/bullseye/dash)
-|| [dialog (1.3-20201126-1)](https://packages.debian.org/bullseye/dialog)
-|| [libc-bin (2.31-13+deb11u6)](https://packages.debian.org/bullseye/libc-bin)
+OS | Debian GNU/Linux 12 (bookworm)
+Kernel | 5.15.133.1-microsoft-standard-WSL2
+Packages | [coreutils (9.1-1)](https://packages.debian.org/bookworm/coreutils)
+|| [dash (0.5.12-2)](https://packages.debian.org/bookworm/dash)
+|| [dialog (1.3-20230209-1)](https://packages.debian.org/bookworm/dialog)
+|| [libc-bin (2.36-9+deb12u3)](https://packages.debian.org/bookworm/libc-bin)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -208,9 +208,14 @@ Packages | [coreutils (8.32-4 und andere)](https://packages.debian.org/bullseye/
 Please make sure that the following dependencies are installed:
 
 * a POSIX-compatible shell, e.g. [Debian Almquist Shell (dash)](http://gondor.apana.org.au/~herbert/dash/), and
-* [Dialog](https://invisible-island.net/dialog/dialog.html), a tool to provide interactive dialog boxes within terminals.
+* [Dialog](https://invisible-island.net/dialog/dialog.html), a tool to provide interactive dialogue boxes within terminals.
 
-Below you can find distribution-specifc installation instructions.
+Below you can find distribution-specific installation instructions.
+
+#### Alpine Linux
+```sh
+sudo apk add coreutils dialog
+```
 
 #### Debian
 ```sh
