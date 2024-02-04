@@ -801,10 +801,22 @@ init_check_pre() {
   # lib_core_is --cmd-su "chmod" "chown"                                      && \
   # # Check for group membership
   # lib_os_user_is_member_of "sudo"                                           && \
+
   # # Check for running service
-  # if ! service cron status >/dev/null 2>&1; then
-  #   lib_core_sudo service cron start
-  # fi                                                                        && \
+  # local nobreak="true"                                                      && \
+  # local s                                                                   && \
+  # local services                                                            && \
+  # case "$(lib_os_get --id)" in
+  #   ${LIB_C_ID_DIST_ALPINE}) services="crond" ;;
+  #   *) services="cron" ;;
+  # esac                                                                      && \
+  # for s in ${services}; do
+  #   if ! service ${s} status >/dev/null 2>&1; then
+  #     lib_core_sudo service ${s} start || { nobreak="false"; break; }
+  #   fi
+  # done                                                                      && \
+  # ${nobreak}                                                                || \
+
   # # Check for existing libraries
   # lib_os_lib --exists "lib.so"                                              && \
   # # Check if host is reachable
