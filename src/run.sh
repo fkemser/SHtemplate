@@ -2230,7 +2230,7 @@ menu_arg_str() {
       dialog --title "${title}" --msgbox "${msg1}" 0 0          && \
       result="$(dialog --extra-button --extra-label "${extra}"  \
         --title "${title}" --inputbox "${text2}" 0 0            \
-        "${arg_str}" 2>&1 1>&3)"                                || \
+        "${result:-${arg_str}}" 2>&1 1>&3)"                     || \
       exitcode="$?"
 
       case "${exitcode}" in
