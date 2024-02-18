@@ -284,6 +284,12 @@ readonly EXT_TEST="test"
 #===============================================================================
 args_check() {
   #-----------------------------------------------------------------------------
+  #  DO NOT EDIT
+  #-----------------------------------------------------------------------------
+  # Check if selected action is compatible with the selected mode
+  lib_shtpl_arg_action_is_valid                                             && \
+
+  #-----------------------------------------------------------------------------
   #                        TODO: DEFINE YOUR CHECKS HERE
   #                   (DO NOT FORGET THE TERMINATING '|| \')
   #
@@ -291,25 +297,49 @@ args_check() {
   #                                    \|||/
   #                                     \|/
   #-----------------------------------------------------------------------------
-  # # CODE SAMPLES
-  # # For more available checks, please have a look at the functions
-  # # <lib_core_is()> and <lib_core_regex()> in '/lib/SHlib/lib/core.lib.sh'
-  # lib_core_is --bool "${arg_bool}"                                          && \
-  # lib_core_is --dir "${arg_dir}"                                            && \
-  # lib_core_is --file "${arg_file}"                                          && \
-  # { lib_core_is --empty "${arg_int}"  \
-  #   ||                                \
-  #   lib_math_is_within_range          \
-  #     "${ARG_INT_MIN}"                \
-  #     "${arg_int}"                    \
-  #     "${ARG_INT_MAX}"
-  # }                                                                         && \
+  # CODE SAMPLES
+  # For more available checks, please have a look at the functions
+  # <lib_core_is()> and <lib_core_regex()> in '/lib/SHlib/lib/core.lib.sh'
+  #
+  #
+  # # Check if mandatory arguments are set
+  # # lib_core_is --set "${arg_bool}" "${arg_str}"                              && \
+  # #
+  # # Check if mandatory arguments are set (with additional error message if not)
+  # lib_shtpl_arg_is_set "arg_bool" "arg_str"                                 && \
+  # #
+  # # Check argument types / value ranges (with additional error message if not)
+  # if lib_core_is --set "${arg_bool}"; then
+  #   lib_core_is --bool "${arg_bool}" || lib_shtpl_arg_error "arg_bool"
+  # fi                                                                        && \
+  # if lib_core_is --set "${arg_dir}"; then
+  #   lib_core_is --dir "${arg_dir}" || lib_shtpl_arg_error "arg_dir"
+  # fi                                                                        && \
+  # if lib_core_is --set "${arg_file}"; then
+  #   lib_core_is --file "${arg_file}" || lib_shtpl_arg_error "arg_file"
+  # fi                                                                        && \
+  # if lib_core_is --set "${arg_int}"; then
+  #   lib_math_is_within_range                          \
+  #     "${ARG_INT_MIN}" "${arg_int}" "${ARG_INT_MAX}"  || \
+  #   lib_shtpl_arg_error "arg_int"
+  # fi                                                                        && \
+  # if lib_core_is --set "${arg_password}"; then
+  #   lib_core_regex "[[:alnum:]]{10,20}" "${arg_password}" || \
+  #   lib_shtpl_arg_error "arg_password"
+  # fi                                                                        && \
+  # #
   # # Check if <ARG_ITEM_LIST> contains <arg_item> (indirectly, via pointers)
-  # lib_core_list_contains_str_ptr "${arg_item}" "${ARG_ITEM_LIST}" " " "ARG_ITEM_" && \
-  # # Check if <ARG_ITEM_LIST> contains <arg_item>
-  # # lib_core_list_contains_str "${arg_item}" "${ARG_ITEM_LIST}" && \
-  # lib_core_regex "[[:alnum:]]{10,20}" "${arg_password}"                     && \
-  # lib_core_is --set "${arg_str}"                                            || \
+  # if lib_core_is --set "${arg_item}"; then
+  #   lib_core_list_contains_str_ptr                      \
+  #     "${arg_item}" "${ARG_ITEM_LIST}" " " "ARG_ITEM_"  || \
+  #   lib_shtpl_arg_error "arg_item"
+  # fi                                                                        || \
+  # #
+  # # Check if <ARG_ITEM_LIST> contains <arg_item> (directly)
+  # # if lib_core_is --set "${arg_item}"; then
+  # #   lib_core_list_contains_str "${arg_item}" "${ARG_ITEM_LIST}" || \
+  # #   lib_shtpl_arg_error "arg_item"
+  # # fi                                                                        || \
   true                                                                      || \
   #-----------------------------------------------------------------------------
   #                                     /|\
@@ -657,7 +687,7 @@ ${par_lastarg} : ${txt_lastarg}"
 
   #  Print
   case "${arg_section}" in
-   ${ARG_SECTION_SYNOPSIS})
+    ${ARG_SECTION_SYNOPSIS})
       eval lib_msg_print_heading -111 \"\${LIB_SHTPL_${ID_LANG}_TXT_HELP_TTL_SYNOPSIS}\"
       printf "%s\n" "${synopsis}"
       ;;
