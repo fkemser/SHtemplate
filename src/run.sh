@@ -214,7 +214,8 @@ readonly ARG_ACTION_LIST_SCRIPT="HELP CUSTOM1 CUSTOM2 CUSTOM3 CUSTOM4 CUSTOM5"
 #  parameters (separated by space) that are allowed in script mode.
 #  !!! Use the variable's name in capital letters,
 #      e.g. for <arg_int> use <ARG_INT> !!!
-readonly LIST_ARG="ARG_BOOL ARG_FILE ARG_INT ARG_ITEM ARG_LOGDEST ARG_PASSWORD ARG_STR"
+readonly LIST_ARG="\
+ARG_BOOL ARG_FILE ARG_INT ARG_ITEM ARG_LOGDEST ARG_PASSWORD ARG_STR"
 
 #-------------------------------------------------------------------------------
 #  Lists of parameters to clear/reset (interactive mode only)
@@ -297,18 +298,24 @@ args_check() {
   #                                    \|||/
   #                                     \|/
   #-----------------------------------------------------------------------------
-  # CODE SAMPLES
-  # For more available checks, please have a look at the functions
-  # <lib_core_is()> and <lib_core_regex()> in '/lib/SHlib/lib/core.lib.sh'
-  #
-  #
-  # # Check if mandatory arguments are set
-  # # lib_core_is --set "${arg_bool}" "${arg_str}"                              && \
-  # #
-  # # Check if mandatory arguments are set (with additional error message if not)
-  # lib_shtpl_arg_is_set "arg_bool" "arg_str"                                 && \
-  # #
-  # # Check argument types / value ranges (with additional error message if not)
+
+  #-----------------------------------------------------------------------------
+  #  Check if mandatory arguments are set (daemon / script mode only)
+  #-----------------------------------------------------------------------------
+  #  Some arguments may not be listed here as <init_update()> may set their
+  #  default values.
+  #-----------------------------------------------------------------------------
+  # if  [ "${arg_mode}" = "${ARG_MODE_DAEMON}" ] || \
+  #     [ "${arg_mode}" = "${ARG_MODE_SCRIPT}" ]; then
+  #   lib_shtpl_arg_is_set "arg_bool" "arg_str"
+  # fi                                                                        && \
+
+  #-----------------------------------------------------------------------------
+  #  Check argument types / value ranges
+  #-----------------------------------------------------------------------------
+  #  For more available checks, please have a look at the functions
+  #  <lib_core_is()> and <lib_core_regex()> in '/lib/SHlib/lib/core.lib.sh'
+  #-----------------------------------------------------------------------------
   # if lib_core_is --set "${arg_bool}"; then
   #   lib_core_is --bool "${arg_bool}" || lib_shtpl_arg_error "arg_bool"
   # fi                                                                        && \
@@ -327,19 +334,20 @@ args_check() {
   #   lib_core_regex "[[:alnum:]]{10,20}" "${arg_password}" || \
   #   lib_shtpl_arg_error "arg_password"
   # fi                                                                        && \
-  # #
+
   # # Check if <ARG_ITEM_LIST> contains <arg_item> (indirectly, via pointers)
   # if lib_core_is --set "${arg_item}"; then
   #   lib_core_list_contains_str_ptr                      \
   #     "${arg_item}" "${ARG_ITEM_LIST}" " " "ARG_ITEM_"  || \
   #   lib_shtpl_arg_error "arg_item"
   # fi                                                                        || \
-  # #
+
   # # Check if <ARG_ITEM_LIST> contains <arg_item> (directly)
   # # if lib_core_is --set "${arg_item}"; then
   # #   lib_core_list_contains_str "${arg_item}" "${ARG_ITEM_LIST}" || \
   # #   lib_shtpl_arg_error "arg_item"
   # # fi                                                                        || \
+
   true                                                                      || \
   #-----------------------------------------------------------------------------
   #                                     /|\
@@ -719,7 +727,6 @@ ${par_lastarg} : ${txt_lastarg}"
   #-----------------------------------------------------------------------------
   lib_msg_print_propvalue "--left" "--left" "2" "" " "                                                          \
     "$(lib_shtpl_arg --par "ARG_ACTION_HELP")"               "$(lib_shtpl_arg --des "ARG_ACTION_HELP")" " " ""  \
-                                                                                                                \
     "$(lib_shtpl_arg --par "ARG_MODE_DAEMON")"               "$(lib_shtpl_arg --des "ARG_MODE_DAEMON")" " " ""  \
                                                                                                                 \
     "$(lib_shtpl_arg --par "ARG_MODE_INTERACTIVE_SUBMENU")"  "$(lib_shtpl_arg --des "ARG_MODE_INTERACTIVE_SUBMENU")
@@ -727,15 +734,10 @@ ${par_lastarg} : ${txt_lastarg}"
 <menu>$(lib_shtpl_arg --list-ptr "arg_action" "INTERACTIVE")" " " ""                                            \
                                                                                                                 \
     "$(lib_shtpl_arg --par "ARG_ACTION_CUSTOM1")"         "$(lib_shtpl_arg --des "ARG_ACTION_CUSTOM1")" " " ""  \
-                                                                                                                \
     "$(lib_shtpl_arg --par "ARG_ACTION_CUSTOM2")"         "$(lib_shtpl_arg --des "ARG_ACTION_CUSTOM2")" " " ""  \
-                                                                                                                \
     "$(lib_shtpl_arg --par "ARG_ACTION_CUSTOM3")"         "$(lib_shtpl_arg --des "ARG_ACTION_CUSTOM3")" " " ""  \
-                                                                                                                \
     "$(lib_shtpl_arg --par "ARG_ACTION_CUSTOM4")"         "$(lib_shtpl_arg --des "ARG_ACTION_CUSTOM4")" " " ""  \
-                                                                                                                \
     "$(lib_shtpl_arg --par "ARG_ACTION_CUSTOM5")"         "$(lib_shtpl_arg --des "ARG_ACTION_CUSTOM5")" " " ""  \
-                                                                                                                \
     "$(lib_shtpl_arg --par "ARG_ACTION_CUSTOM6")"         "$(lib_shtpl_arg --des "ARG_ACTION_CUSTOM6")"
   #-----------------------------------------------------------------------------
   #                                     /|\
@@ -770,9 +772,7 @@ ${par_lastarg} : ${txt_lastarg}"
 $(lib_shtpl_arg --list-des-def "arg_logdest")" " " ""                                           \
                                                                                                 \
     "$(lib_shtpl_arg --par "arg_bool")"       "$(lib_shtpl_arg --des "arg_bool")" " " ""        \
-                                                                                                \
     "$(lib_shtpl_arg --par "arg_dir")"        "$(lib_shtpl_arg --des "arg_dir")" " " ""         \
-                                                                                                \
     "$(lib_shtpl_arg --par "arg_file")"       "$(lib_shtpl_arg --des "arg_file")" " " ""        \
                                                                                                 \
     "$(lib_shtpl_arg --par "arg_int")"        "$(lib_shtpl_arg --des "arg_int")
@@ -784,7 +784,6 @@ $(lib_shtpl_arg --minmax-def "arg_int")" " " ""                                 
 $(lib_shtpl_arg --list-ptr-def "arg_item")" " " ""                                              \
                                                                                                 \
     "$(lib_shtpl_arg --par "arg_password")"  "$(lib_shtpl_arg --des-def "arg_password")" " " "" \
-                                                                                                \
     "$(lib_shtpl_arg --par "arg_str")" "$(lib_shtpl_arg --des-def "arg_str")"
   #-----------------------------------------------------------------------------
   #                                     /|\
@@ -2295,7 +2294,10 @@ menu_arg_str() {
 main "$@"
 
 #===============================================================================
-#  CODE TEMPLATES
+#  FURTHER CODE SAMPLES
+#===============================================================================
+#  There are some code snippets that did not fit into the template but yet they
+#  are worth to be mentioned.
 #===============================================================================
 #-------------------------------------------------------------------------------
 #  Run a certain command (<cmd>) and in case of any error do not only log a

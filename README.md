@@ -293,7 +293,7 @@ The template is separated into **multiple files** where each file does a differe
 |       |                                               | [`run.0.lang.sh`](#srclangrunlangsh-repository-string-constants-files)  | Language-Independent String Constants File (`/src/run.sh`)                                                                                                                              |
 |       |                                               | [`run.<ll>.lang.sh`](#srclangrunlangsh-repository-string-constants-files)  | Language-Specific String Constants Files (`/src/run.sh`)                                                                                                                              |
 |       |                                               | [`<...>.lang.sh`](#further-string-constants-files-srclanglangsh) | Further String Constants Files                                                                                                                             |
-|       | [`init.sh`](#srcinitsh)                       | | Repository Initialisation Script                                      |
+|       | [`init.sh`](#srcinitsh)                       | | Repository Initialization Script                                      |
 |       | **[`run.sh`](#srcrunsh-repository-run-file)** | | **Repository Run File**                                               |
 | test  | [`...`](#test)                                | | Test folder, only used for [Daemon Mode Sample](#daemon-mode-sample)  |
 

@@ -10,7 +10,7 @@
 #        USAGE:   ---
 #                 (This is a configuration script, so please do NOT run it.)
 #
-#  DESCRIPTION:   Repository Initialisation Script - Used to
+#  DESCRIPTION:   Repository Initialization Script - Used to
 #                  - set file/folder structure,
 #                  - load libraries from </lib/*.lib.sh>, </lib/*/*.lib.sh>,
 #                    and </lib/*/lib/*.lib.sh>,
@@ -27,7 +27,7 @@
 #===============================================================================
 #  CHECK IF SCRIPT WAS PREVIOUSLY RUN
 #===============================================================================
-if ${I_INITIALISED:-false} 2>/dev/null; then return; fi
+if ${I_INITIALIZED:-false} 2>/dev/null; then return; fi
 
 #===============================================================================
 #  FILE / FOLDER STRUCTURE (TEMPLATE) - DO NOT EDIT
@@ -50,7 +50,7 @@ readonly I_EXT_CFG="cfg.sh"                     # Configuration File Extension
 readonly I_EXT_LANG="lang.sh"                   # String Constants File Extension
 readonly I_EXT_LIB="lib.sh"                     # Library File Extension
 
-readonly I_FILE_SH_INIT="${I_DIR_SRC}/init.sh"  # Initialisation Script
+readonly I_FILE_SH_INIT="${I_DIR_SRC}/init.sh"  # Initialization Script
 
 #===============================================================================
 #  FILE / FOLDER STRUCTURE (CUSTOM)
@@ -108,8 +108,8 @@ done
 # Extend PATH variable (temporarily) otherwise some commands may not be found
 lib_core_env_append "PATH" "/sbin" "/usr/sbin"                              && \
 
-# Initialisation completed
-readonly I_INITIALISED="true"                                               || \
+# Initialization completed
+readonly I_INITIALIZED="true"                                               || \
 
 # Break if an error occurs
 return
