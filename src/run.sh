@@ -305,9 +305,15 @@ args_check() {
   #  Some arguments may not be listed here as <init_update()> may set their
   #  default values.
   #-----------------------------------------------------------------------------
-  # if  [ "${arg_mode}" = "${ARG_MODE_DAEMON}" ] || \
-  #     [ "${arg_mode}" = "${ARG_MODE_SCRIPT}" ]; then
-  #   lib_shtpl_arg_is_set "arg_bool" "arg_str"
+  # if  [ "${arg_action}" != "${ARG_ACTION_HELP}" ]; then
+  #   case "${arg_mode}" in
+  #     ${ARG_MODE_DAEMON})
+  #       lib_shtpl_arg_is_set "arg_dir"
+  #       ;;
+  #     ${ARG_MODE_SCRIPT})
+  #       lib_shtpl_arg_is_set "arg_bool" "arg_str"
+  #       ;;
+  #   esac    
   # fi                                                                        && \
 
   #-----------------------------------------------------------------------------
@@ -397,10 +403,10 @@ args_read() {
       #  PARAMETER (TEMPLATE)
       #-------------------------------------------------------------------------
       #  Script actions <ARG_ACTION_...>
-      -h|--help) arg_action="${ARG_ACTION_HELP}"; break;;
+      -h|--help) arg_action="${ARG_ACTION_HELP}"; break ;;
 
       #  Script operation modes <ARG_MODE_...>
-      -D|--daemon) arg_mode="${ARG_MODE_DAEMON}";;
+      -D|--daemon) arg_mode="${ARG_MODE_DAEMON}" ;;
       --submenu)
         # Possibility to run a certain submenu interactively
         arg_mode="${ARG_MODE_INTERACTIVE_SUBMENU}"
@@ -409,7 +415,7 @@ args_read() {
         ;;
 
       #  Other parameters <arg_...>
-      --log) arg_logdest="$2"; [ $# -ge 1 ] && { shift; };;
+      --log) arg_logdest="$2"; [ $# -ge 1 ] && { shift; } ;;
 
       #-------------------------------------------------------------------------
       #  PARAMETER (CUSTOM)
@@ -472,12 +478,12 @@ args_read() {
       #  Other parameters <arg_...>
       #  TODO: Please make sure that the command line options set here match
       #        the ones set in '/src/lang/run.0.lang.sh' (<L_RUN_HLP_PAR_ARG_...>).
-      -b|--bool)      arg_bool="true";;
-      -f|--file)      arg_file="$(lib_core_expand_tilde "$2")"; [ $# -ge 1 ] && { shift; };;
-      -i|--int)       arg_int="$2"; [ $# -ge 1 ] && { shift; };;
-      -j|--item)      arg_item="$2"; [ $# -ge 1 ] && { shift; };;
-      -p|--password)  arg_password="$(lib_core_parse_credentials "$2")" && [ $# -ge 1 ] && { shift; };;
-      -s|--str)       arg_str="$2"; [ $# -ge 1 ] && { shift; };;
+      -b|--bool)      arg_bool="true" ;;
+      -f|--file)      arg_file="$(lib_core_expand_tilde "$2")"; [ $# -ge 1 ] && { shift; } ;;
+      -i|--int)       arg_int="$2"; [ $# -ge 1 ] && { shift; } ;;
+      -j|--item)      arg_item="$2"; [ $# -ge 1 ] && { shift; } ;;
+      -p|--password)  arg_password="$(lib_core_parse_credentials "$2")" && [ $# -ge 1 ] && { shift; } ;;
+      -s|--str)       arg_str="$2"; [ $# -ge 1 ] && { shift; } ;;
       #-------------------------------------------------------------------------
       #                                   /|\
       #                                  /|||\
@@ -1071,9 +1077,9 @@ init_lang() {
   #                                     \|/
   #-----------------------------------------------------------------------------
   case "${ID_LANG}" in
-    ${LIB_C_ID_LANG_EN}) readonly ID_LANG="${LIB_C_ID_L_EN}";;
-    ${LIB_C_ID_LANG_DE}) readonly ID_LANG="${LIB_C_ID_L_DE}";;
-    *) readonly ID_LANG="${LIB_C_ID_L_EN}";;
+    ${LIB_C_ID_LANG_EN}) readonly ID_LANG="${LIB_C_ID_L_EN}" ;;
+    ${LIB_C_ID_LANG_DE}) readonly ID_LANG="${LIB_C_ID_L_DE}" ;;
+    *) readonly ID_LANG="${LIB_C_ID_L_EN}" ;;
   esac
   #-----------------------------------------------------------------------------
   #                                     /|\
@@ -1214,9 +1220,9 @@ main() {
 
   # Run mode-specific subfunctions
   case "${arg_mode}" in
-    ${ARG_MODE_DAEMON}) main_daemon;;
-    ${ARG_MODE_INTERACTIVE}|${ARG_MODE_INTERACTIVE_SUBMENU}) main_interactive || return $?;;
-    ${ARG_MODE_SCRIPT}) main_script;;
+    ${ARG_MODE_DAEMON}) main_daemon ;;
+    ${ARG_MODE_INTERACTIVE}|${ARG_MODE_INTERACTIVE_SUBMENU}) main_interactive || return $? ;;
+    ${ARG_MODE_SCRIPT}) main_script ;;
   esac
 }
 
@@ -1407,9 +1413,9 @@ run() {
     #---------------------------------------------------------------------------
     #  TEMPLATE - DO NOT EDIT
     #---------------------------------------------------------------------------
-    ${ARG_ACTION_ABOUT})        lib_shtpl_about --dialog;;
-    ${ARG_ACTION_EXIT})         clear; exit;;
-    ${ARG_ACTION_HELP})         help;;
+    ${ARG_ACTION_ABOUT})        lib_shtpl_about --dialog ;;
+    ${ARG_ACTION_EXIT})         clear; exit ;;
+    ${ARG_ACTION_HELP})         help ;;
 
     #---------------------------------------------------------------------------
     #  CUSTOM
@@ -1610,8 +1616,8 @@ trap_main() {
     # as they may run in background (asynchronously).
     local sub_signal
     case "${arg_signal}" in
-      INT|QUIT) sub_signal="TERM";;
-      *)        sub_signal="${arg_signal}";;
+      INT|QUIT) sub_signal="TERM" ;;
+      *)        sub_signal="${arg_signal}" ;;
     esac
 
     # Kill subshells / child processes
@@ -1643,11 +1649,11 @@ trap_main() {
   case "${arg_signal}" in
     EXIT)
       # ... EXIT
-      exit;;
+      exit ;;
     *)
       # ... other signals:
       # Clear EXIT trap handling, otherwise <trap_main()> would run again.
-      trap - EXIT; exit 1;;
+      trap - EXIT; exit 1 ;;
   esac
 }
 
@@ -1729,7 +1735,7 @@ menu_main() {
 
   #  Default actions do not depend on any further parameter
   case "${arg_action}" in
-    ${ARG_ACTION_ABOUT}|${ARG_ACTION_EXIT}|${ARG_ACTION_HELP}) return;;
+    ${ARG_ACTION_ABOUT}|${ARG_ACTION_EXIT}|${ARG_ACTION_HELP}) return ;;
   esac                                                                      && \
 
   #-----------------------------------------------------------------------------
@@ -1742,32 +1748,32 @@ menu_main() {
   #-----------------------------------------------------------------------------
   # All modes that require <arg_bool>
   case "${arg_action}" in
-    ${ARG_ACTION_CUSTOM2}) menu_arg_bool;;
+    ${ARG_ACTION_CUSTOM2}) menu_arg_bool ;;
   esac                                                                      && \
 
   # All modes that require <arg_dir>
   case "${arg_action}" in
-    ${ARG_ACTION_CUSTOM3}) menu_arg_dir;;
+    ${ARG_ACTION_CUSTOM3}) menu_arg_dir ;;
   esac                                                                      && \
 
   # All modes that require <arg_file>
   case "${arg_action}" in
-    ${ARG_ACTION_CUSTOM5}|${ARG_ACTION_CUSTOM6}) menu_arg_file;;
+    ${ARG_ACTION_CUSTOM5}|${ARG_ACTION_CUSTOM6}) menu_arg_file ;;
   esac                                                                      && \
 
   # All modes that require <arg_int>
   case "${arg_action}" in
-    ${ARG_ACTION_CUSTOM4}) menu_arg_int;;
+    ${ARG_ACTION_CUSTOM4}) menu_arg_int ;;
   esac                                                                      && \
 
   # All modes that require <arg_item>
   case "${arg_action}" in
-    ${ARG_ACTION_CUSTOM2}) menu_arg_item;;
+    ${ARG_ACTION_CUSTOM2}) menu_arg_item ;;
   esac                                                                      && \
 
   # All modes that require <arg_str>
   case "${arg_action}" in
-    ${ARG_ACTION_CUSTOM4}) menu_arg_str;;
+    ${ARG_ACTION_CUSTOM4}) menu_arg_str ;;
   esac                                                                      || \
   #-----------------------------------------------------------------------------
   #                                     /|\
@@ -2014,8 +2020,8 @@ trap_func1() {
 
   # Exit
   case "${arg_signal}" in
-    EXIT) exit;;
-    *) trap - EXIT; exit 1;;
+    EXIT) exit ;;
+    *) trap - EXIT; exit 1 ;;
   esac
 }
 #===============================================================================
@@ -2272,7 +2278,7 @@ menu_arg_str() {
           ;;
         *)
           # 'dialog' interrupted => Break
-          break;;
+          break ;;
       esac
     done
   exec 3>&-
