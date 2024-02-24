@@ -305,15 +305,18 @@ args_check() {
   #  Some arguments may not be listed here as <init_update()> may set their
   #  default values.
   #-----------------------------------------------------------------------------
-  # if  [ "${arg_action}" != "${ARG_ACTION_HELP}" ]; then
-  #   case "${arg_mode}" in
-  #     ${ARG_MODE_DAEMON})
-  #       lib_shtpl_arg_is_set "arg_dir"
-  #       ;;
-  #     ${ARG_MODE_SCRIPT})
-  #       lib_shtpl_arg_is_set "arg_bool" "arg_str"
-  #       ;;
-  #   esac    
+  # if    [ "${arg_action}" != "${ARG_ACTION_HELP}" ] && \
+  #       [ "${arg_mode}" = "${ARG_MODE_DAEMON}" ]; then
+
+  #   # Daemon mode
+  #   lib_shtpl_arg_is_set "arg_dir"
+
+  # elif  [ "${arg_action}" != "${ARG_ACTION_HELP}" ] && \
+  #       [ "${arg_mode}" = "${ARG_MODE_SCRIPT}" ]; then
+  
+  #   # Script mode
+  #   lib_shtpl_arg_is_set "arg_bool" "arg_str"
+
   # fi                                                                        && \
 
   #-----------------------------------------------------------------------------
