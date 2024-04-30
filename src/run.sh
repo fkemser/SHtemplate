@@ -20,7 +20,7 @@
 #        NOTES:   Please edit the configuration file (/etc/run.cfg.sh)
 #                 before you start.
 #
-#        TODO:    See 'TODO:'-tagged lines below.
+#         TODO:   See 'TODO:'-tagged lines below.
 #===============================================================================
 
 #===============================================================================
