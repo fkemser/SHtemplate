@@ -1068,7 +1068,7 @@ Don't forget to give the project a star! Thanks again!
 
 Distributed under the **MIT License**. See [`LICENSE`][license-url] for more information.  
 
-> :warning: The license above does not apply to the files and folders within the library `/lib` directory. Please have a look at the `LICENSE` file located in the root directory of each library to get more information.
+> :warning: The license above does not apply to the files and folders within the library directory `/lib`. Please have a look at the `LICENSE` file located in the root directory of each library to get more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
