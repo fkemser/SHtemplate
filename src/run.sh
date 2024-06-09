@@ -313,7 +313,7 @@ args_check() {
 
   # elif  [ "${arg_action}" != "${ARG_ACTION_HELP}" ] && \
   #       [ "${arg_mode}" = "${ARG_MODE_SCRIPT}" ]; then
-  
+
   #   # Script mode
   #   lib_shtpl_arg_is_set "arg_bool" "arg_str"
 
@@ -524,6 +524,11 @@ args_read() {
           #  Case 3: Check if it can be a filepath
           # touch -c "${lastarg}" 2>/dev/null && \
           # arg_file="${lastarg}"
+
+          #  Case 4: There is no optional last argument
+          #  Ignore unknown argument and continue ('true')
+          #  or exit program ('false')?
+          # false
         else
           #  More than one argument left
           #
