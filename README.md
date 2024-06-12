@@ -129,7 +129,7 @@
     </li>
     <li><a href="#adding-support-for-other-languages">Adding support for other languages</a></li>
     <li><a href="#further-code-samples">Further Code Samples</a></li>
-    <li><a href="#usage-example">Usage (Example)</a></li>
+    <li><a href="#usage-srcrunsh-example">Usage (/src/run.sh) (Example)</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -261,7 +261,7 @@ sudo apt install coreutils dash dialog libc-bin
 Before you continue to [customize the template](#template-structure) it is recommended to **ask yourself the following questions**:
 
 - What are the main goals of my script?
-- How shall this script be run? As a (normal) script, interactively, (indefinitely) as a daemon, or mixedly?
+- How shall this script be run? As a (normal) script, interactively, (infinitely) as a daemon, or mixedly?
 - Which parameters do I need, which arguments are allowed?
 - Which commands/packages have to be installed before?
 - Are there any other requirements?
@@ -356,7 +356,7 @@ Edit this file to set **general information about your repository, e.g. author, 
 Use these files to store **string constants for help messages, command outputs, interactive menus, etc.** Afterwards you can reference them in [`/src/run.sh`](#srcrunsh-repository-run-file) by using their constant identifiers.
   
 For better code readability and maintenance the **constants are distributed over multiple files**: `run.0.lang.sh` for **language-independent** constants and
- `run.<ll>.lang.sh` for **language-specific** constants where `<ll>` in the filename is the language's [ISO 639-1][iso639-1-url] ID in lowercase letters, e.g. `run.en.lang.sh` contains all English strings, `run.de.lang.sh` the German strings, etc.
+ `run.<ll>.lang.sh` for **language-specific** constants where `<ll>` in the filename is the language's [ISO 639-1][iso639-1-url] ID in lowercase letters, e.g. `run.en.lang.sh` contains all English strings, `run.de.lang.sh` all German strings, etc.
 
 > :warning: Regarding the constant identifiers: Please follow the **naming convention below**, otherwise certain features, e.g. the semi-automatic creation of the script's help, will not work correctly.
 
@@ -399,7 +399,7 @@ For more information please run `dialog --help` or `man dialog`.
 | `<I>`   | Index, starting from 1                                                  | 1                                 |
 | `<LL>`  | Language ID ([ISO 639-1][iso639-1-url])                                 | EN                                |
 | `<REF>` | Function, parameter, or parameter (list) value this constant refers to  | HELP, ARG_ACTION, ARG_ACTION_HELP |
-| `<S>`   | Reverse script name without '.sh'                                       | RUN                               |
+| `<S>`   | Reverse script (file) name without '.sh'                                | RUN                               |
 | `<T>`   | Identifier that describes what the string is about                      | ERR_NOT_FOUND                     |
 
 ### Further String Constants Files (/src/lang/*.lang.sh)
@@ -425,10 +425,10 @@ A **mode** defines **how the script is executed**. The template supports four di
 
 | Mode        | Description                         |
 |-------------|-------------------------------------|
-| daemon      | Indefinite (background/daemon) mode |
+| daemon      | Infinite (background/daemon) mode |
 | interactive | Interactive mode using `dialog`     |
 | script      | Classic script mode                 |
-| submenu     | Like `interactive` but with the intention to run one certain submenu and then exit. Usually used by other scripts to skip the welcome dialogue and main menu. |
+| submenu     | Like `interactive` but with the intention to run one certain submenu and then exit. Usually used by other scripts to skip the welcome dialogue and the main menu. |
 
 > :information_source: Your script does not have to support all modes.
 
@@ -453,7 +453,7 @@ To provide certain features, e.g. the semi-automatic creation of `help()`, the s
 
 | Constant                            | Description                                     |
 |-------------------------------------|-------------------------------------------------|
-| **`ARG_ACTION_LIST_INTERACTIVE`** / **`ARG_ACTION_LIST_SCRIPT`** | Lists of allowed actions `ARG_ACTION_...` in interactive (including submenu) and script mode. Used for auto-generating help's `SYNOPSIS` section and the main menu in interactive mode. |
+| **`ARG_ACTION_LIST_INTERACTIVE`** / **`ARG_ACTION_LIST_SCRIPT`** | Lists of allowed actions `ARG_ACTION_...` in interactive, submenu, and script mode. Used for auto-generating help's `SYNOPSIS` section and the main menu in interactive/submenu mode. |
 | `ID_LANG`                           | Current language ID (ISO 639-1), see [`init_lang()`](#init_lang).
 | `INSTANCES`                         | Instance counter. Used to check if this script was called recursively.
 | **`LIST_ARG`**                      | Lists of compatible parameters (script mode only). Used for auto-generating help's `SYNOPSIS` section. |
@@ -469,11 +469,11 @@ To provide certain features, e.g. the semi-automatic creation of `help()`, the s
 
 | Variable          | Description                                                   |
 |-------------------|---------------------------------------------------------------|
-| `arg_action`      | Script actions, see [Actions](#actions)                       |
+| `arg_action`      | Current script action, see [Actions](#actions)                |
 | `arg_logdest`     | Log destination (terminal, `syslog`, both), see [msg()](#msg) |
-| `arg_mode`        | Script operation modes, see [Modes](#modes)                   |
-| `trap_blocked`    | Prevent trap execution? (`true\|false`) Can be used to [temporarily disable trap handling](#temporarily-disable-trap-handling) |
-| `trap_triggered`  | <trap_...()> function was called? (`true\|false`) Used to decide if trap handling has to be (manually) launched after [temporarily disabling it](#temporarily-disable-trap-handling) |
+| `arg_mode`        | Current script operation mode, see [Modes](#modes)            |
+| `trap_blocked`    | Prevent trap execution? (`true\|false`) Can be used to [temporarily disable trap handling](#temporarily-disable-trap-handling). |
+| `trap_triggered`  | `trap_...()` function was called? (`true\|false`) Used to decide if trap handling has to be (manually) launched after [temporarily disabling it](#temporarily-disable-trap-handling). |
 
 > :exclamation: Please **do not delete or change** any of the variables as the template heavily relies on them.
 
@@ -504,7 +504,7 @@ To provide certain features, e.g. the semi-automatic creation of `help()`, the s
 | [`trap_main()`](#trap_main)             | Trap (cleanup and exit) function for this script                |
 | `warning()`                             | See [`msg()`](#msg)                                             |
 
-> :exclamation: All functions are essential and must not be deleted. However, you should edit them within the `TODO:` sections to adapt the script to your needs.
+> :exclamation: All functions are essential and **must not be deleted**. However, you should edit them within the `TODO:` sections to adapt the script to your needs.
 
 <p align="right">(<a href="#overview">back to overview</a>)</p>
 
@@ -514,7 +514,7 @@ Use this function to **check if passed arguments are valid**. You will already f
 * file/folder checks,
 * data type checks,
 * regex checks,
-* value range checks
+* value range checks.
 
 > :information_source: For more checks please have a look at the functions `lib_core_is()` and `lib_core_regex()` in [`lib/SHlib/lib/core.lib.sh`](https://github.com/fkemser/SHlib/blob/432d56b38dc795aa98d59fe185921d38cc21637c/lib/core.lib.sh)
 
@@ -545,7 +545,7 @@ This function prints the **help message** by using the `less` utility. By defaul
 
 > :warning: Please **do not hardcode any help texts within this function**. Instead, edit [`/src/lang/run.<...>.lang.sh`](#srclangrunlangsh-repository-string-constants-files) to define (write) your help texts and edit [`help_synopsis()`](#help_synopsis) to modify the `SYNOPSIS` section of your help.
 
-> :information_source: For a full example just have a look at the [Usage](#usage-example) section below.
+> :information_source: For a full example just have a look at the [Usage](#usage-srcrunsh-example) section below.
 
 <p align="right">(<a href="#functions">back to overview</a>)</p>
 
@@ -562,7 +562,7 @@ Edit this function to **perform mandatory and/or optional requirement checks bef
 
 * available commands,
 * running services,
-* superuser rights
+* superuser rights.
 
 <p align="right">(<a href="#functions">back to overview</a>)</p>
 
@@ -578,7 +578,7 @@ Furthermore this function installs a **trap handler** that calls [`trap_main()`]
 
 Edit this function in case you would like to
 * **modify the trap handler (signals, arguments) for [`trap_main()`](#trap_main)**,
-* **add further intialisation commands**
+* **add further initialization commands**
 
 <p align="right">(<a href="#functions">back to overview</a>)</p>
 
@@ -586,10 +586,10 @@ Edit this function in case you would like to
 This function detects your system's default language and stores its [ISO 639-1][iso639-1-url] ID in `ID_LANG`. This constant is used to generate language-dependent terminal, log, and `dialog` messages.
 
 Edit this function in case you
- * would like **to add support for other language**, or
+ * would like **to add support for other languages**, or
  * have **text strings for custom terminal/log messages**.
 
-> :warning: Before editing this function please make sure that the [template already supports your language](#adding-support-for-other-languages) and that all language-specific texts (constants) have been defined in [`/src/lang/run.<ll>.lang.sh`](#srclangrunlangsh-repository-string-constants-files).
+> :warning: Before editing this function please make sure that this [template already supports your language](#adding-support-for-other-languages) and that all language-specific texts (constants) have been defined in [`/src/lang/run.<ll>.lang.sh`](#srclangrunlangsh-repository-string-constants-files).
 
 <p align="right">(<a href="#functions">back to overview</a>)</p>
 
@@ -730,11 +730,11 @@ This is `func1()` 's special trap function and is only used if the script is run
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 #### Daemon Mode Sample
-In daemon mode [`main_daemon()`](#main_daemon) runs [`func1()`](#func1) not only for a single file but over all files with a pre-defined extension (`EXT_TEST`) within a pre-defined folder (`arg_dir`). This is done parallely, meaning that there are running **multiple instances** of [`func1()`](#func1), one per file, running in a **subshell**.
+In daemon mode [`main_daemon()`](#main_daemon) runs [`func1()`](#func1) not only for a single file but over all files with a pre-defined extension (`EXT_TEST`) within a pre-defined folder (`arg_dir`). This is done parallelly, meaning that there are running **multiple instances** of [`func1()`](#func1), one per file, running in a **subshell**.
 
 To allow the subshells to terminate safely on signals, e.g. `SIGTERM`, [`func1()`](#func1) installs [`trap_func1()`](#trap_func1) as a trap handler within the subshell.
 
-To let the daemon mode run indifinetly there are two loops: One within [`func1()`](#func1) (within each subshell) and a second one in [`main_daemon()`](#main_daemon) (within the calling script). The latter is just a backup: In case a subshell crashes, it gets "respawned" within a maximum period of time that can be defined via the constant `T_DAEMON_SLEEP`.
+To let the daemon mode run infinitely there are two loops: One within [`func1()`](#func1) (within each subshell) and a second one in [`main_daemon()`](#main_daemon) (within the calling script). The latter is just a backup: In case a subshell crashes, it gets "respawned" within a maximum period of time that can be defined via the constant `T_DAEMON_SLEEP`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -748,7 +748,7 @@ To add support for other languages please follow these steps:
 
 2. Create your project/repository-specific translation file [`/src/lang/run.<ll>.lang.sh`](#srclangrunlangsh-repository-string-constants-files) where `<ll>` in the filename is the language's [ISO 639-1][iso639-1-url] ID in lowercase letters, e.g. create `run.`**`es`**`.lang.sh` to store **`Spanish`** strings.
 
-3. To finally enable support for the new language: Open [`/src/run.sh`](#srcrunsh-repository-run-file) and look for the `init_lang()` function. Add your language's [ISO 639-1][iso639-1-url] ID within the `TODO:` section, e.g. to add Spanish (`ES`) to the list, simply add:
+3. To finally enable support for the new language: Open [`/src/run.sh`](#srcrunsh-repository-run-file) and look for the `init_lang()` function. Add your language's [ISO 639-1][iso639-1-url] ID within the `TODO:` section, e.g. to support Spanish (`ES`), simply add:
 
 ```sh
 case "${ID_LANG}" in
@@ -802,8 +802,8 @@ if eval [ \${${INSTANCES}} -gt 1 ]; then echo "Script recursively called"; fi
 
 
 
-<!-- HELP (EXAMPLE) -->
-## Help (Example)
+<!-- USAGE (HELP) -->
+## Usage (/src/run.sh) (Example)
 
 ```sh
 ================================================================================
