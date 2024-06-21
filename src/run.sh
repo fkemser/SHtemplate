@@ -325,34 +325,34 @@ args_check() {
   #  For more available checks, please have a look at the functions
   #  <lib_core_is()> and <lib_core_regex()> in '/lib/SHlib/lib/core.lib.sh'
   #-----------------------------------------------------------------------------
-  # if lib_core_is --set "${arg_bool}"; then
+  # if lib_core_is --not-empty "${arg_bool}"; then
   #   lib_core_is --bool "${arg_bool}" || lib_shtpl_arg_error "arg_bool"
   # fi                                                                        && \
-  # if lib_core_is --set "${arg_dir}"; then
+  # if lib_core_is --not-empty "${arg_dir}"; then
   #   lib_core_is --dir "${arg_dir}" || lib_shtpl_arg_error "arg_dir"
   # fi                                                                        && \
-  # if lib_core_is --set "${arg_file}"; then
+  # if lib_core_is --not-empty "${arg_file}"; then
   #   lib_core_is --file "${arg_file}" || lib_shtpl_arg_error "arg_file"
   # fi                                                                        && \
-  # if lib_core_is --set "${arg_int}"; then
+  # if lib_core_is --not-empty "${arg_int}"; then
   #   lib_math_is_within_range                          \
   #     "${ARG_INT_MIN}" "${arg_int}" "${ARG_INT_MAX}"  || \
   #   lib_shtpl_arg_error "arg_int"
   # fi                                                                        && \
-  # if lib_core_is --set "${arg_password}"; then
+  # if lib_core_is --not-empty "${arg_password}"; then
   #   lib_core_regex "[[:alnum:]]{10,20}" "${arg_password}" || \
   #   lib_shtpl_arg_error "arg_password"
   # fi                                                                        && \
 
   # # Check if <ARG_ITEM_LIST> contains <arg_item> (indirectly, via pointers)
-  # if lib_core_is --set "${arg_item}"; then
+  # if lib_core_is --not-empty "${arg_item}"; then
   #   lib_core_list_contains_str_ptr                      \
   #     "${arg_item}" "${ARG_ITEM_LIST}" " " "ARG_ITEM_"  || \
   #   lib_shtpl_arg_error "arg_item"
   # fi                                                                        || \
 
   # # Check if <ARG_ITEM_LIST> contains <arg_item> (directly)
-  # # if lib_core_is --set "${arg_item}"; then
+  # # if lib_core_is --not-empty "${arg_item}"; then
   # #   lib_core_list_contains_str "${arg_item}" "${ARG_ITEM_LIST}" || \
   # #   lib_shtpl_arg_error "arg_item"
   # # fi                                                                        || \
@@ -693,7 +693,7 @@ ${ttl_action} := $(lib_msg_print_list_ptr "${ARG_ACTION_LIST_SCRIPT}" "${ptr_pre
 
 ${ttl_option} := $(lib_msg_print_list_ptr "${LIST_ARG}" "${ptr_prefix}_HLP_PAR_" "" "true")"
 
-  if lib_core_is --set "${txt_lastarg}"; then
+  if lib_core_is --not-empty "${txt_lastarg}"; then
     synopsis="\
 ${synopsis}
 
