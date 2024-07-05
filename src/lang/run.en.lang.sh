@@ -141,7 +141,7 @@ readonly L_RUN_EN_HLP_DES_ARG_ACTION_CUSTOM4="Help <ARG_ACTION_CUSTOM4>. Regardi
 
 #  ARG_ACTION_CUSTOM5
 readonly L_RUN_EN_DLG_ITM_ARG_ACTION_CUSTOM5="Dialogue List Item <ARG_ACTION_CUSTOM5>"
-readonly L_RUN_EN_HLP_DES_ARG_ACTION_CUSTOM5="Help <ARG_ACTION_CUSTOM5>. Either use a given <file> or <stdin>'s (pipe) content ('echo \"string\" | ${L_ABOUT_RUN} --custom5')."
+readonly L_RUN_EN_HLP_DES_ARG_ACTION_CUSTOM5="Help <ARG_ACTION_CUSTOM5>. Either use a given <file> or <stdin>'s (pipe) content ('echo \"string\" | ${L_RUN_ABOUT_RUN} --custom5')."
 
 #  ARG_ACTION_CUSTOM6
 readonly L_RUN_EN_DLG_ITM_ARG_ACTION_CUSTOM6="Dialogue List Item <ARG_ACTION_CUSTOM6>"

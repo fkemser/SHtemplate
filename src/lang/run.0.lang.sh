@@ -32,6 +32,14 @@
 #  Language-independent constants, to be stored within THIS file
 #===============================================================================
 #-------------------------------------------------------------------------------
+#  Used in help, section "ABOUT" and welcome dialogue
+#-------------------------------------------------------------------------------
+#  Constant                       Description
+#  (Example)
+#  -----------------------------------------------------------------------------
+#  L_<S>_ABOUT_...                See 'ABOUT THIS REPOSITORY' section below.
+#
+#-------------------------------------------------------------------------------
 #  Used in help, section "SYNOPSIS"
 #-------------------------------------------------------------------------------
 #  Constant                       Description             Example (value)
@@ -136,6 +144,46 @@
 #===============================================================================
 
 #===============================================================================
+#  ABOUT THIS REPOSITORY - DO NOT DELETE
+#===============================================================================
+#  Author name and mail address (multiple authors separated by newline)
+readonly L_RUN_ABOUT_AUTHORS="<ABOUT_AUTHORS>"
+
+#  (Optional) One-line description of what the project is about.
+#  Please start with a low letter and leave the terminating '.' out.
+readonly L_RUN_ABOUT_DESCRIPTION="<ABOUT_DESCRIPTION>"
+
+#  (Optional) Institution (multiple lines allowed)
+readonly L_RUN_ABOUT_INSTITUTION="<ABOUT_INSTITUTION>"
+
+#  (Optional) Project license (SPDX-License-Identifier)
+#
+#  For the full SPDX license list please have a look at
+#  'https://spdx.org/licenses/'. However, only some licenses
+#  are supported, see </lib/SHtemplateLIB/lib/licenses> folder.
+#
+#  If you are not sure which license to choose
+#  just have a look at e.g. 'https://choosealicense.com'.
+readonly L_RUN_ABOUT_LICENSE="<ABOUT_LICENSE>"
+
+#  (Optional) ASCII logo to display when running the script in interactive ('dialog') mode
+readonly L_RUN_ABOUT_LOGO="\
+<ABOUT_LOGO>
+"
+
+#  Project title, e.g. 'My Project'
+readonly L_RUN_ABOUT_PROJECT="<ABOUT_PROJECT>"
+
+#  DO NOT EDIT
+readonly L_RUN_ABOUT_RUN="./$(basename "$0")"
+
+#  (Optional) Release/Version number, e.g. '1.1.0'
+readonly L_RUN_ABOUT_VERSION="<ABOUT_VERSION>"
+
+#  (Optional) Project year(s), e.g. '2023', '2023-2024'
+readonly L_RUN_ABOUT_YEARS="<ABOUT_YEARS>"
+
+#===============================================================================
 #  PARAMETER (TEMPLATE) - DO NOT EDIT
 #===============================================================================
 #  Script actions <ARG_ACTION_...>
@@ -184,9 +232,9 @@ readonly L_RUN_HLP_PAR_LASTARG="[<file>]"
 #  EXAMPLES
 #-------------------------------------------------------------------------------
 readonly L_RUN_HLP_TXT_EXAMPLES_1="\
-> ${L_ABOUT_RUN} --custom1"
+> ${L_RUN_ABOUT_RUN} --custom1"
 readonly L_RUN_HLP_TXT_EXAMPLES_2="\
-> ${L_ABOUT_RUN} --custom2 --item item2"
+> ${L_RUN_ABOUT_RUN} --custom2 --item item2"
 
 #-------------------------------------------------------------------------------
 #  NOTES

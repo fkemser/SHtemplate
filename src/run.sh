@@ -680,10 +680,10 @@ help_synopsis() {
 ${txt_intro}
 
 ${txt_interactive}:
-> ${L_ABOUT_RUN}
+> ${L_RUN_ABOUT_RUN}
 
 ${txt_script}:
-> ${L_ABOUT_RUN} [ ${ttl_option} ]... ${ttl_action}${par_lastarg:+ ${par_lastarg}}"
+> ${L_RUN_ABOUT_RUN} [ ${ttl_option} ]... ${ttl_action}${par_lastarg:+ ${par_lastarg}}"
 
   #  SYNOPSIS (long) version
   synopsis="\

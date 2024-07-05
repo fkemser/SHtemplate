@@ -83,7 +83,6 @@
         <li><a href="#etcruncfgsh">/etc/run.cfg.sh</a></li>
         <li><a href="#lib">/lib/...</a></li>
         <li><a href="#srcinitsh">/src/init.sh</a></li>
-        <li><a href="#srclangaboutlangsh-repository-about-file">/src/lang/about.lang.sh</a></li>
       </ul>
     </li>
     <li><a href="#srclangrunlangsh-repository-string-constants-files">/src/lang/run.<...>.lang.sh (Repository String Constants Files)</a></li>
@@ -289,7 +288,6 @@ The template is separated into **multiple files** where each file does a differe
 |       | [`...`](#lib)                                 | | Further libraries / library subdirectories                            |
 | src   |                                               | |                                                                       |
 |       | lang                                          | |                                                                       |
-|       |                                               | [`about.lang.sh`](#srclangaboutlangsh-repository-about-file) | Repository About File                                                                                                                              |
 |       |                                               | [`run.0.lang.sh`](#srclangrunlangsh-repository-string-constants-files)  | Language-Independent String Constants File (`/src/run.sh`)                                                                                                                              |
 |       |                                               | [`run.<ll>.lang.sh`](#srclangrunlangsh-repository-string-constants-files)  | Language-Specific String Constants Files (`/src/run.sh`)                                                                                                                              |
 |       |                                               | [`<...>.lang.sh`](#further-string-constants-files-srclanglangsh) | Further String Constants Files                                                                                                                             |
@@ -344,12 +342,6 @@ This file is loaded by [`/src/run.sh`](#srcrunsh-repository-run-file) to initial
 <p align="right">(<a href="#overview">back to overview</a>)</p>
 
 
-
-<!-- /src/lang/about.lang.sh -->
-## `/src/lang/about.lang.sh` (Repository About File)
-Edit this file to set **general information about your repository, e.g. author, institution, license, etc.**
-
-<p align="right">(<a href="#overview">back to overview</a>)</p>
 
 <!-- /src/lang/run.<...>.lang.sh -->
 ## `/src/lang/run.<...>.lang.sh` (Repository String Constants Files)

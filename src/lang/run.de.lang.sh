@@ -141,7 +141,7 @@ readonly L_RUN_DE_HLP_DES_ARG_ACTION_CUSTOM4="Hilfe <ARG_ACTION_CUSTOM4>. Bezüg
 
 #  ARG_ACTION_CUSTOM5
 readonly L_RUN_DE_DLG_ITM_ARG_ACTION_CUSTOM5="Dialog-Listenelement <ARG_ACTION_CUSTOM5>"
-readonly L_RUN_DE_HLP_DES_ARG_ACTION_CUSTOM5="Hilfe <ARG_ACTION_CUSTOM5>. Verwendet entweder eine Datei (<file>) oder alternativ den Inhalt der Pipe <stdin> ('echo \"string\" | ${L_ABOUT_RUN} --custom5')."
+readonly L_RUN_DE_HLP_DES_ARG_ACTION_CUSTOM5="Hilfe <ARG_ACTION_CUSTOM5>. Verwendet entweder eine Datei (<file>) oder alternativ den Inhalt der Pipe <stdin> ('echo \"string\" | ${L_RUN_ABOUT_RUN} --custom5')."
 
 #  ARG_ACTION_CUSTOM6
 readonly L_RUN_DE_DLG_ITM_ARG_ACTION_CUSTOM6="Dialog-Listenelement <ARG_ACTION_CUSTOM6>"
