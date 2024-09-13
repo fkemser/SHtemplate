@@ -25,7 +25,7 @@
 #  !!! IMPORTANT !!!
 #===============================================================================
 #  All constants (identifiers) must follow a certain naming convention,
-#  see '/src/lang/run.0.lang.sh'
+#  see '/src/lang/run.0.lang.sh'.
 
 #===============================================================================
 #  PARAMETER (TEMPLATE) - DO NOT EDIT

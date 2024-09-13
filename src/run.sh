@@ -312,6 +312,12 @@ args_check() {
   #   lib_shtpl_arg_is_set "arg_dir"
 
   # elif  [ "${arg_action}" != "${ARG_ACTION_HELP}" ] && \
+  #       [ "${arg_mode}" = "${ARG_MODE_INTERACTIVE_SUBMENU}" ]; then
+
+  #   # Submenu mode
+  #   true
+
+  # elif  [ "${arg_action}" != "${ARG_ACTION_HELP}" ] && \
   #       [ "${arg_mode}" = "${ARG_MODE_SCRIPT}" ]; then
 
   #   # Script mode
@@ -1052,7 +1058,7 @@ init_first() {
   #                                     |||
   #                                    \|||/
   #                                     \|/
-  #----------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------
   #-----------------------------------------------------------------------------
   #                                     /|\
   #                                    /|||\
