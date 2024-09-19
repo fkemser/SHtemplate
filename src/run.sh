@@ -300,30 +300,35 @@ args_check() {
   #-----------------------------------------------------------------------------
 
   #-----------------------------------------------------------------------------
-  #  Check if mandatory arguments are set (daemon / script mode only)
+  #  Check if mandatory arguments are set (daemon / submenu / script mode only)
   #-----------------------------------------------------------------------------
   #  Some arguments may not be listed here as <init_update()> may set their
   #  default values.
   #-----------------------------------------------------------------------------
-  # if    [ "${arg_action}" != "${ARG_ACTION_HELP}" ] && \
-  #       [ "${arg_mode}" = "${ARG_MODE_DAEMON}" ]; then
+  if    [ "${arg_action}" != "${ARG_ACTION_HELP}" ] && \
+        [ "${arg_mode}" = "${ARG_MODE_DAEMON}" ]; then
+    #---------------------------------------------------------------------------
+    #  Daemon mode
+    #---------------------------------------------------------------------------
+    # lib_shtpl_arg_is_set "arg_dir"
+    true
 
-  #   # Daemon mode
-  #   lib_shtpl_arg_is_set "arg_dir"
+  elif  [ "${arg_action}" != "${ARG_ACTION_HELP}" ] && \
+        [ "${arg_mode}" = "${ARG_MODE_INTERACTIVE_SUBMENU}" ]; then
+    #---------------------------------------------------------------------------
+    #  Submenu mode
+    #---------------------------------------------------------------------------
+    true
 
-  # elif  [ "${arg_action}" != "${ARG_ACTION_HELP}" ] && \
-  #       [ "${arg_mode}" = "${ARG_MODE_INTERACTIVE_SUBMENU}" ]; then
+  elif  [ "${arg_action}" != "${ARG_ACTION_HELP}" ] && \
+        [ "${arg_mode}" = "${ARG_MODE_SCRIPT}" ]; then
+    #---------------------------------------------------------------------------
+    #  Script mode
+    #---------------------------------------------------------------------------
+    # lib_shtpl_arg_is_set "arg_bool" "arg_str"
+    true
 
-  #   # Submenu mode
-  #   true
-
-  # elif  [ "${arg_action}" != "${ARG_ACTION_HELP}" ] && \
-  #       [ "${arg_mode}" = "${ARG_MODE_SCRIPT}" ]; then
-
-  #   # Script mode
-  #   lib_shtpl_arg_is_set "arg_bool" "arg_str"
-
-  # fi                                                                        && \
+  fi                                                                        && \
 
   #-----------------------------------------------------------------------------
   #  Check argument types / value ranges
@@ -331,25 +336,47 @@ args_check() {
   #  For more available checks, please have a look at the functions
   #  <lib_core_is()> and <lib_core_regex()> in '/lib/SHlib/lib/core.lib.sh'
   #-----------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------
+  #  arg_bool
+  #-----------------------------------------------------------------------------
   # if lib_core_is --not-empty "${arg_bool}"; then
   #   lib_core_is --bool "${arg_bool}" || lib_shtpl_arg_error "arg_bool"
   # fi                                                                        && \
+
+  #-----------------------------------------------------------------------------
+  #  arg_dir
+  #-----------------------------------------------------------------------------
   # if lib_core_is --not-empty "${arg_dir}"; then
   #   lib_core_is --dir "${arg_dir}" || lib_shtpl_arg_error "arg_dir"
   # fi                                                                        && \
+
+  #-----------------------------------------------------------------------------
+  #  arg_file
+  #-----------------------------------------------------------------------------
   # if lib_core_is --not-empty "${arg_file}"; then
   #   lib_core_is --file "${arg_file}" || lib_shtpl_arg_error "arg_file"
   # fi                                                                        && \
+
+  #-----------------------------------------------------------------------------
+  #  arg_int
+  #-----------------------------------------------------------------------------
   # if lib_core_is --not-empty "${arg_int}"; then
   #   lib_math_is_within_range                          \
   #     "${ARG_INT_MIN}" "${arg_int}" "${ARG_INT_MAX}"  || \
   #   lib_shtpl_arg_error "arg_int"
   # fi                                                                        && \
+
+  #-----------------------------------------------------------------------------
+  #  arg_password
+  #-----------------------------------------------------------------------------
   # if lib_core_is --not-empty "${arg_password}"; then
   #   lib_core_regex "[[:alnum:]]{10,20}" "${arg_password}" || \
   #   lib_shtpl_arg_error "arg_password"
   # fi                                                                        && \
 
+  #-----------------------------------------------------------------------------
+  #  arg_item
+  #-----------------------------------------------------------------------------
   # # Check if <ARG_ITEM_LIST> contains <arg_item> (indirectly, via pointers)
   # if lib_core_is --not-empty "${arg_item}"; then
   #   lib_core_list_contains_str_ptr                      \
