@@ -214,6 +214,7 @@ readonly ARG_ACTION_LIST_SCRIPT="HELP CUSTOM1 CUSTOM2 CUSTOM3 CUSTOM4 CUSTOM5"
 #  parameters (separated by space) that are allowed in script mode.
 #  !!! Use the variable's name in capital letters,
 #      e.g. for <arg_int> use <ARG_INT> !!!
+#-------------------------------------------------------------------------------
 readonly LIST_ARG="\
 ARG_BOOL ARG_FILE ARG_INT ARG_ITEM ARG_LOGDEST ARG_PASSWORD ARG_STR"
 
@@ -225,6 +226,7 @@ ARG_BOOL ARG_FILE ARG_INT ARG_ITEM ARG_LOGDEST ARG_PASSWORD ARG_STR"
 #  To assign a default value to a parameter please define a constant (above)
 #  with the suffix '_DEFAULT', e.g. <ARG_STR_DEFAULT> for <arg_str>.
 #  !!! Use the variable's name as defined, so usually lowercase letters !!!
+#-------------------------------------------------------------------------------
 readonly LIST_ARG_CLEANUP_INTERACTIVE="arg_str"
 #-------------------------------------------------------------------------------
 #                                      /|\
@@ -284,58 +286,105 @@ readonly EXT_TEST="test"
 #            1:  At least one argument is not valid
 #===============================================================================
 args_check() {
-  #-----------------------------------------------------------------------------
+  #=============================================================================
   #  DO NOT EDIT
-  #-----------------------------------------------------------------------------
+  #=============================================================================
   # Check if selected action is compatible with the selected mode
   lib_shtpl_arg_action_is_valid                                             && \
 
-  #-----------------------------------------------------------------------------
+  #=============================================================================
   #                        TODO: DEFINE YOUR CHECKS HERE
   #                   (DO NOT FORGET THE TERMINATING '|| \')
   #
   #                                     |||
   #                                    \|||/
   #                                     \|/
-  #-----------------------------------------------------------------------------
+  #=============================================================================
 
-  #-----------------------------------------------------------------------------
+  #=============================================================================
   #  Check if mandatory arguments are set (daemon / submenu / script mode only)
-  #-----------------------------------------------------------------------------
+  #=============================================================================
   #  Some arguments may not be listed here as <init_update()> may set their
   #  default values.
-  #-----------------------------------------------------------------------------
+  #=============================================================================
   if    [ "${arg_action}" != "${ARG_ACTION_HELP}" ] && \
         [ "${arg_mode}" = "${ARG_MODE_DAEMON}" ]; then
-    #---------------------------------------------------------------------------
+    #===========================================================================
     #  Daemon mode
-    #---------------------------------------------------------------------------
+    #===========================================================================
     # lib_shtpl_arg_is_set "arg_dir"
     true
 
   elif  [ "${arg_action}" != "${ARG_ACTION_HELP}" ] && \
         [ "${arg_mode}" = "${ARG_MODE_INTERACTIVE_SUBMENU}" ]; then
-    #---------------------------------------------------------------------------
+    #===========================================================================
     #  Submenu mode
-    #---------------------------------------------------------------------------
+    #===========================================================================
     true
 
   elif  [ "${arg_action}" != "${ARG_ACTION_HELP}" ] && \
         [ "${arg_mode}" = "${ARG_MODE_SCRIPT}" ]; then
-    #---------------------------------------------------------------------------
-    #  Script mode
-    #---------------------------------------------------------------------------
-    # lib_shtpl_arg_is_set "arg_bool" "arg_str"
+    #===========================================================================
+    #  Script mode (action-independent checks)
+    #===========================================================================
+    # lib_shtpl_arg_is_set "arg_bool" "arg_str"                               && \
+    true                                                                    && \
+
+    #===========================================================================
+    #  Script mode (action-dependent checks that are specific to script mode)
+    #===========================================================================
+    case "${arg_action}" in
+      *) true ;;
+    esac                                                                    && \
+
+    #===========================================================================
+    #  Script mode (checks that are also relevant to interactive mode)
+    #===========================================================================
+    #  The following checks mostly follow <menu_main()>'s structure.
+    #===========================================================================
+    #todo: testen
+    # # All modes that require <arg_bool>
+    # case "${arg_action}" in
+    #   ${ARG_ACTION_CUSTOM2}) lib_shtpl_arg_is_set "arg_bool" ;;
+    # esac                                                                    && \
+
+    # # All modes that require <arg_dir>
+    # case "${arg_action}" in
+    #   ${ARG_ACTION_CUSTOM3}) lib_shtpl_arg_is_set "arg_dir" ;;
+    # esac                                                                    && \
+
+    # # All modes that require <arg_file>
+    # case "${arg_action}" in
+    #   ${ARG_ACTION_CUSTOM5}|${ARG_ACTION_CUSTOM6})
+    #     lib_shtpl_arg_is_set "arg_file"
+    #     ;;
+    # esac                                                                    && \
+
+    # # All modes that require <arg_int>
+    # case "${arg_action}" in
+    #   ${ARG_ACTION_CUSTOM4}) lib_shtpl_arg_is_set "arg_int" ;;
+    # esac                                                                    && \
+
+    # # All modes that require <arg_item>
+    # case "${arg_action}" in
+    #   ${ARG_ACTION_CUSTOM2}) lib_shtpl_arg_is_set "arg_item" ;;
+    # esac                                                                    && \
+
+    # # All modes that require <arg_str>
+    # case "${arg_action}" in
+    #   ${ARG_ACTION_CUSTOM4}) lib_shtpl_arg_is_set "arg_str" ;;
+    # esac
+
     true
 
   fi                                                                        && \
 
-  #-----------------------------------------------------------------------------
+  #=============================================================================
   #  Check argument types / value ranges
-  #-----------------------------------------------------------------------------
+  #=============================================================================
   #  For more available checks, please have a look at the functions
   #  <lib_core_is()> and <lib_core_regex()> in '/lib/SHlib/lib/core.lib.sh'
-  #-----------------------------------------------------------------------------
+  #=============================================================================
   #-----------------------------------------------------------------------------
   #  arg_bool
   #-----------------------------------------------------------------------------
@@ -391,14 +440,14 @@ args_check() {
   # # fi                                                                        || \
 
   true                                                                      || \
-  #-----------------------------------------------------------------------------
+  #=============================================================================
   #                                     /|\
   #                                    /|||\
   #                                     |||
   #
   #                        TODO: DEFINE YOUR CHECKS HERE
   #                   (DO NOT FORGET THE TERMINATING '|| \')
-  #-----------------------------------------------------------------------------
+  #=============================================================================
   { error "${TXT_ARGS_CHECK_ERR}"
     return 1
   }
@@ -965,7 +1014,7 @@ init_check_post() {
     ${ARG_LOGDEST_TERMINAL})
       ;;
     *)
-      lib_msg_message --terminal --error "${TXT_INVALID_ARG_1} <${arg_logdest}> ${TXT_INVALID_ARG_2} [${L_RUN_HLP_PAR_ARG_LOGDEST}]. ${LIB_SHTPL_EN_TPL_TXT_HELP} ${LIB_SHTPL_EN_TXT_ABORTING}"
+      lib_msg_message --terminal --error "${TXT_INVALID_ARG_1} <${arg_logdest}> ${TXT_INVALID_ARG_2} [${L_RUN_HLP_PAR_ARG_LOGDEST}]. ${LIB_SHTPL_EN_TXT_HELP} ${LIB_SHTPL_EN_TXT_ABORTING}"
       ;;
   esac                                                                      && \
 
