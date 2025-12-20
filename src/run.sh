@@ -1253,7 +1253,7 @@ init_update() {
 #         NAME:  main
 #  DESCRIPTION:  Main function
 #      OUTPUTS:  (See functions listed below)
-
+#
 #                In case an error occurs during <init_...()> or <args_...()>:
 #                  An error message will be printed to <stderr> and/or <syslog>,
 #                  the script's help will be automatically shown, and the script
