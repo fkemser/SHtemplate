@@ -11,7 +11,7 @@
 #                 (This is a constant file, so please do NOT run it.)
 #
 #  DESCRIPTION:   --English-- String Constants File for '/src/run.sh'
-#                 Used to generate help texts, interactive dialogues,
+#                 Used to generate help texts, interactive dialogs,
 #                 and other terminal/log messages.
 #
 #         BUGS:   ---

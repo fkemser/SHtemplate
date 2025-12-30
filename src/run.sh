@@ -1364,7 +1364,7 @@ main_daemon() {
 #  DESCRIPTION:  Main subfunction (interactive / submenu mode)
 #===============================================================================
 main_interactive() {
-  # Check for minimum terminal size (otherwise some dialogues would fail)
+  # Check for minimum terminal size (otherwise some dialogs would fail)
   lib_msg_dialog_autosize >/dev/null                                        && \
 
   # Show welcome message (but not in submenu mode)
@@ -1815,7 +1815,7 @@ menu_arg_action() {
 #  DESCRIPTION:  Main menu (interactive mode)
 #===============================================================================
 menu_main() {
-  # Check for minimum terminal size (otherwise some dialogues would fail)
+  # Check for minimum terminal size (otherwise some dialogs would fail)
   lib_msg_dialog_autosize >/dev/null                                        || \
   { sleep 3; return 1; }
 
@@ -2234,11 +2234,11 @@ menu_arg_file() {
       result="$(lib_core_expand_tilde "${result}")"                         || \
       exitcode="$?"
 
-      #  Show prompt again if <result>
-      #    - is not a valid filepath (<ARG_ACTION_CUSTOM5>)
-      #    - is already existing (<ARG_ACTION_CUSTOM5>)
-      #    - does not exist  (<ARG_ACTION_CUSTOM6>)
-      #  unless the user has pressed the 'Cancel' button
+      # Show prompt again if <result>
+      #   - is not a valid filepath (<ARG_ACTION_CUSTOM5>)
+      #   - is already existing (<ARG_ACTION_CUSTOM5>)
+      #   - does not exist  (<ARG_ACTION_CUSTOM6>)
+      # unless the user has pressed the 'Cancel' button
       case "${exitcode}" in
         0)
           { case "${arg_action}" in

@@ -207,7 +207,7 @@ Packages | [coreutils (9.1-1)](https://packages.debian.org/bookworm/coreutils)
 Please make sure that the following dependencies are installed:
 
 * a POSIX-compatible shell, e.g. [Debian Almquist Shell (dash)](http://gondor.apana.org.au/~herbert/dash/), and
-* [Dialog](https://invisible-island.net/dialog/dialog.html), a tool to provide interactive dialogue boxes within terminals.
+* [Dialog](https://invisible-island.net/dialog/dialog.html), a tool to provide interactive dialog boxes within terminals.
 
 Below you can find distribution-specific installation instructions.
 
@@ -420,7 +420,7 @@ A **mode** defines **how the script is executed**. The template supports four di
 | daemon      | Infinite (background/daemon) mode |
 | interactive | Interactive mode using `dialog`     |
 | script      | Classic script mode                 |
-| submenu     | Like `interactive` but with the intention to run one certain submenu and then exit. Usually used by other scripts to skip the welcome dialogue and the main menu. |
+| submenu     | Like `interactive` but with the intention to run one certain submenu and then exit. Usually used by other scripts to skip the welcome dialog and the main menu. |
 
 > :information_source: Your script does not have to support all modes.
 
@@ -431,7 +431,7 @@ An **action** consists of **one or multiple commands that the user can trigger**
 
 | Action              | Description                                 |
 |---------------------|---------------------------------------------|
-| **about**           | Print dialogue with information about your repository (authors, license, etc.). Only used in interactive mode. |
+| **about**           | Print dialog with information about your repository (authors, license, etc.). Only used in interactive mode. |
 | **help**            | Show the script's help.                     |
 | **exit**            | Exit script. Only used in interactive mode. |
 | custom1 ... custom6 | [Sample actions 1 - 6](#sample-actions)     |
