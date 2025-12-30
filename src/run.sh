@@ -383,7 +383,8 @@ args_check() {
   #  Check argument types / value ranges
   #=============================================================================
   #  For more available checks, please have a look at the functions
-  #  <lib_core_is()> and <lib_core_regex()> in '/lib/SHlib/lib/core.lib.sh'
+  #  <lib_core_is()> in '/lib/SHlib/lib/core.lib.sh' and
+  #  <lib_regex()> in '/lib/SHlib/lib/regex.lib.sh'.
   #=============================================================================
   #-----------------------------------------------------------------------------
   #  arg_bool
@@ -419,7 +420,7 @@ args_check() {
   #  arg_password
   #-----------------------------------------------------------------------------
   # if lib_core_is --not-empty "${arg_password}"; then
-  #   lib_core_regex "[[:alnum:]]{10,20}" "${arg_password}" || \
+  #   lib_regex "[[:alnum:]]{10,20}" "${arg_password}" || \
   #   lib_shtpl_arg_error "arg_password"
   # fi                                                                        && \
 
@@ -2361,7 +2362,7 @@ menu_arg_str() {
       case "${exitcode}" in
         0)
           # 'dialog' completed => If value is valid then break, otherwise go on
-          lib_core_regex "[[:alnum:]]+" "${result}" && break
+          lib_regex "[[:alnum:]]+" "${result}" && break
           ;;
         3)
           # Extra button (go back) pressed => Stay in loop
